@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\CreateTeamController;
+use App\Http\Controllers\CreateTeamMemberController;
+use App\Http\Controllers\CreateUserController;
+use App\Http\Middleware\ApiKey;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware([ApiKey::class])->group(function () {
+    Route::post('/user', CreateUserController::class);
+    Route::post('/team-member', CreateTeamMemberController::class);
+    Route::post('/team', CreateTeamController::class);
 });
