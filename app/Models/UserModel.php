@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
 class UserModel extends Authenticatable
@@ -42,7 +43,7 @@ class UserModel extends Authenticatable
      */
     public function findUserByUuid(UuidInterface $uuid) : User
     {
-        return UserModel::where('uuid', $uuid->getBytes())->first();
+        return $this->parse(UserModel::where('uuid', $uuid->toString())->first());
     }
 
     /**
@@ -51,9 +52,24 @@ class UserModel extends Authenticatable
     public function createUser(User $user) : void
     {
         UserModel::create([
-            'uuid'  => $user->getUuid()->getBytes(),
+            'uuid'  => $user->getUuid()->toString(),
             'name'  => $user->getName(),
             'email' => $user->getEmail()
         ]);
+    }
+
+    /**
+     * @param  UserModel  $userModel
+     *
+     * @return User
+     */
+    private function parse(UserModel $userModel) : User
+    {
+        return new User(
+            $userModel->id,
+            Uuid::fromString($userModel->uuid),
+            $userModel->name,
+            $userModel->email
+        );
     }
 }
