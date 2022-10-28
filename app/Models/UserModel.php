@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Domain\Users\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Ramsey\Uuid\UuidInterface;
 
-class User extends Authenticatable
+class UserModel extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -30,4 +32,9 @@ class User extends Authenticatable
     protected $hidden = [
         'remember_token',
     ];
+
+    public function findByUuid(UuidInterface $uuid) : User
+    {
+
+    }
 }
