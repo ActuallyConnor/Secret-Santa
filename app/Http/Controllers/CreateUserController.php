@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Api\Serializers\Users\UserSerializer;
-use App\Models\UserModel;
+use App\Models\UsersModel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -11,7 +11,7 @@ class CreateUserController extends Controller
 {
     public function __construct(
         private readonly UserSerializer $serializer,
-        private readonly UserModel $model
+        private readonly UsersModel $model
     ) {
 
     }
@@ -24,7 +24,7 @@ class CreateUserController extends Controller
 
         $this->model->createUser($user);
 
-        $serializedUser = $this->serializer->serialize($this->model->findUserByUuid($user->getUuid()));
+        $serializedUser = $this->serializer->serialize($this->model->findByUuid($user->getUuid()));
 
         return new JsonResponse($serializedUser, 201);
     }

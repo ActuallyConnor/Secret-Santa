@@ -15,8 +15,10 @@ return new class extends Migration {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->uuid();
-            $table->string('team_name');
+            $table->string('name');
             $table->boolean('is_team_full');
+            $table->json('team_members');
+            $table->json('matches')->nullable();
             $table->timestamps();
         });
     }

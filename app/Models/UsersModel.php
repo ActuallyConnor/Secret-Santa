@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
-class UserModel extends Authenticatable
+class UsersModel extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -41,9 +41,9 @@ class UserModel extends Authenticatable
      *
      * @return User
      */
-    public function findUserByUuid(UuidInterface $uuid) : User
+    public function findByUuid(UuidInterface $uuid) : User
     {
-        return $this->parse(UserModel::where('uuid', $uuid->toString())->first());
+        return $this->parse(UsersModel::where('uuid', $uuid->toString())->first());
     }
 
     /**
@@ -51,7 +51,7 @@ class UserModel extends Authenticatable
      */
     public function createUser(User $user) : void
     {
-        UserModel::create([
+        UsersModel::create([
             'uuid'  => $user->getUuid()->toString(),
             'name'  => $user->getName(),
             'email' => $user->getEmail()
@@ -59,11 +59,11 @@ class UserModel extends Authenticatable
     }
 
     /**
-     * @param  UserModel  $userModel
+     * @param  UsersModel  $userModel
      *
      * @return User
      */
-    private function parse(UserModel $userModel) : User
+    private function parse(UsersModel $userModel) : User
     {
         return new User(
             $userModel->id,
