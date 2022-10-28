@@ -24,8 +24,8 @@ class CreateUserController extends Controller
 
         $this->model->createUser($user);
 
-        $serializedUser = $this->serializer->serialize($this->model->findByUuid($user->getUuid()));
-
-        return new JsonResponse($serializedUser, 201);
+        return new JsonResponse(
+            $this->serializer->serialize($this->model->findByUuid($user->getUuid())),
+            201);
     }
 }
