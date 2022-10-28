@@ -13,6 +13,8 @@ class UserModel extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -33,8 +35,25 @@ class UserModel extends Authenticatable
         'remember_token',
     ];
 
-    public function findByUuid(UuidInterface $uuid) : User
+    /**
+     * @param  UuidInterface  $uuid
+     *
+     * @return User
+     */
+    public function findUserByUuid(UuidInterface $uuid) : User
     {
+        return UserModel::where('uuid', $uuid->getBytes())->first();
+    }
 
+    /**
+     * @param  User  $user
+     */
+    public function createUser(User $user) : void
+    {
+        UserModel::create([
+            'uuid'  => $user->getUuid()->getBytes(),
+            'name'  => $user->getName(),
+            'email' => $user->getEmail()
+        ]);
     }
 }
