@@ -20,9 +20,9 @@ class CreateUserController extends Controller
     {
         // TODO: validate
 
-        $this->serializer->deserialize(json_decode($request->getContent(), true));
+        $user = $this->serializer->deserialize(json_decode($request->getContent(), true));
 
-        $user = $this->model->findByUuid();
+        $user = $this->model->findByUuid($user->getUuid());
 
         return new JsonResponse([], 201);
     }
