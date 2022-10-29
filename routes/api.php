@@ -1,10 +1,9 @@
 <?php
 
-use App\Http\Controllers\CreateTeamController;
-use App\Http\Controllers\CreateTeamMemberController;
-use App\Http\Controllers\CreateUserController;
+use App\Http\Controllers\Teams\CreateTeamController;
+use App\Http\Controllers\TeamMembers\CreateTeamMemberController;
+use App\Http\Controllers\Users\CreateUserController;
 use App\Http\Middleware\ApiKey;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +18,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware([ApiKey::class])->group(function () {
-    Route::post('/user', CreateUserController::class);
-    Route::post('/team-member', CreateTeamMemberController::class);
-    Route::post('/team', CreateTeamController::class);
+    Route::prefix('user')->group(function () {
+        Route::post(null, CreateUserController::class);
+    });
+
+    Route::prefix('team-member')->group(function () {
+        Route::post(null, CreateTeamMemberController::class);
+    });
+
+    Route::prefix('team')->group(function () {
+        Route::post(null, CreateTeamController::class);
+    });
 });

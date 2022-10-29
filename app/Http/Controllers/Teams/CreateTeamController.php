@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Teams;
 
 use App\Api\Serializers\Teams\TeamSerializer;
+use App\Http\Controllers\Controller;
 use App\Models\TeamsModel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Users;
 
 use App\Api\Serializers\Users\UserSerializer;
+use App\Http\Controllers\Controller;
 use App\Models\UsersModel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
