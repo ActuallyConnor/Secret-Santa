@@ -12,6 +12,8 @@ class TeamsModel extends Model
 {
     use HasFactory;
 
+    protected $table = 'teams';
+
     protected $fillable = [
         'uuid',
         'name',
