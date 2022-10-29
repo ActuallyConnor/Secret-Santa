@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Domain\Users\User;
+use App\Exceptions\UserNotFoundException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -40,9 +41,16 @@ class UsersModel extends Authenticatable
      * @param  UuidInterface  $uuid
      *
      * @return User
+     * @throws UserNotFoundException
      */
     public function findByUuid(UuidInterface $uuid) : User
     {
+        $user = UsersModel::where('uuid', $uuid->toString())->first();
+
+        if (is_null($user)) {
+            throw new UserNotFoundException(sprintf('User not found "%s"', $uuid->toString()));
+        }
+
         return $this->parse(UsersModel::where('uuid', $uuid->toString())->first());
     }
 

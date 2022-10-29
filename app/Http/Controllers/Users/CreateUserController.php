@@ -27,6 +27,7 @@ class CreateUserController extends Controller
 
         return new JsonResponse(
             $this->serializer->serialize($this->model->findByUuid($user->getUuid())),
-            201);
+            201
+        );
     }
 }

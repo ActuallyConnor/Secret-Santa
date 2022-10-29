@@ -3,6 +3,7 @@
 use App\Http\Controllers\Teams\CreateTeamController;
 use App\Http\Controllers\TeamMembers\CreateTeamMemberController;
 use App\Http\Controllers\Users\CreateUserController;
+use App\Http\Controllers\Users\ReadUserController;
 use App\Http\Middleware\ApiKey;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware([ApiKey::class])->group(function () {
     Route::prefix('user')->group(function () {
+        Route::get('/{uuid}', ReadUserController::class);
         Route::post(null, CreateUserController::class);
     });
 
