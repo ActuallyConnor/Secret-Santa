@@ -38,14 +38,14 @@ class TeamsModel extends Model
     public function createTeam(Team $team) : void
     {
         TeamsModel::create([
-            'uuid'        => $team->getUuid()->toString(),
-            'name'        => $team->getName(),
-            'isTeamFull'  => $team->isTeamFull(),
-            'teamMembers' => array_map(
+            'uuid'         => $team->getUuid()->toString(),
+            'name'         => $team->getName(),
+            'is_team_full' => $team->isTeamFull(),
+            'team_members' => json_encode(array_map(
                 fn($teamMember) => $teamMember->toString(),
                 $team->getTeamMembers()
-            ),
-            'matches'     => $team->getMatches()
+            )),
+            'matches'      => json_encode($team->getMatches())
         ]);
     }
 
@@ -60,12 +60,12 @@ class TeamsModel extends Model
             $teamsModel->id,
             Uuid::fromString($teamsModel->uuid),
             $teamsModel->name,
-            $teamsModel->isTeamFull,
+            $teamsModel->is_team_full,
             array_map(
                 fn($teamMemberUuid) => Uuid::fromString($teamMemberUuid),
-                $teamsModel->teamMembers
+                json_decode($teamsModel->team_members, true)
             ),
-            $teamsModel->matches ?? []
+            isset($teamsModel->matches) ? json_decode($teamsModel->matches, true) : []
         );
     }
 }

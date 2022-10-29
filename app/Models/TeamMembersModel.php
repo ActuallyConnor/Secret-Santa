@@ -16,8 +16,8 @@ class TeamMembersModel extends Model
 
     protected $fillable = [
         'uuid',
-        'user_uuid',
-        'team_uuid',
+        'user',
+        'team',
         'is_team_captain'
     ];
 
@@ -37,10 +37,10 @@ class TeamMembersModel extends Model
     public function createTeamMember(TeamMember $teamMember) : void
     {
         TeamMembersModel::create([
-            'uuid'          => $teamMember->getUuid()->toString(),
-            'user'          => $teamMember->getUser()->toString(),
-            'team'          => $teamMember->getTeam()->toString(),
-            'isTeamCaptain' => $teamMember->isTeamCaptain()
+            'uuid'            => $teamMember->getUuid()->toString(),
+            'user'            => $teamMember->getUser()->toString(),
+            'team'            => $teamMember->getTeam()->toString(),
+            'is_team_captain' => $teamMember->isTeamCaptain()
         ]);
     }
 
@@ -56,7 +56,7 @@ class TeamMembersModel extends Model
             Uuid::fromString($teamMembersModel->uuid),
             Uuid::fromString($teamMembersModel->user),
             Uuid::fromString($teamMembersModel->team),
-            $teamMembersModel->isTeamCaptain
+            $teamMembersModel->is_team_captain
         );
     }
 }
