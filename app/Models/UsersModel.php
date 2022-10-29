@@ -51,7 +51,7 @@ class UsersModel extends Authenticatable
             throw new UserNotFoundException(sprintf('User not found "%s"', $uuid->toString()));
         }
 
-        return $this->parse(UsersModel::where('uuid', $uuid->toString())->first());
+        return $this->parse($user);
     }
 
     /**

@@ -40,7 +40,7 @@ class TeamsModel extends Model
             throw new TeamNotFoundException(sprintf('Team not found "%s"', $uuid->toString()));
         }
 
-        return $this->parse(TeamsModel::where('uuid', $uuid->toString())->first());
+        return $this->parse($team);
     }
 
     /**

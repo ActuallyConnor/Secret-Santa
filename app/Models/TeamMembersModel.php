@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Domain\TeamMembers\TeamMember;
+use App\Exceptions\TeamMemberNotFoundException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
@@ -25,10 +26,17 @@ class TeamMembersModel extends Model
      * @param  UuidInterface  $uuid
      *
      * @return TeamMember
+     * @throws TeamMemberNotFoundException
      */
     public function findByUuid(UuidInterface $uuid) : TeamMember
     {
-        return $this->parse(TeamMembersModel::where('uuid', $uuid->toString())->first());
+        $teamMember = TeamMembersModel::where('uuid', $uuid->toString())->first();
+
+        if (is_null($teamMember)) {
+            throw new TeamMemberNotFoundException(sprintf('Team Member not found "%s"', $uuid->toString()));
+        }
+
+        return $this->parse($teamMember);
     }
 
     /**
