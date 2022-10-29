@@ -4,7 +4,7 @@ namespace App\Http\Controllers\TeamMembers;
 
 use App\Api\Serializers\TeamMembers\TeamMemberSerializer;
 use App\Http\Controllers\Controller;
-use App\Models\TeamMembersModel;
+use App\Models\TeamMembers\TeamMembersModel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

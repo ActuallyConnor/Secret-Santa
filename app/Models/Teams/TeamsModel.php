@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Teams;
 
 use App\Api\JSON;
 use App\Domain\Teams\Team;

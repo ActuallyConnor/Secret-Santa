@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\TeamMembers;
 
 use App\Domain\TeamMembers\TeamMember;
 use App\Exceptions\TeamMemberNotFoundException;
