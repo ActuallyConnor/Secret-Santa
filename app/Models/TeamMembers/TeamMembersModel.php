@@ -3,7 +3,7 @@
 namespace App\Models\TeamMembers;
 
 use App\Domain\TeamMembers\TeamMember;
-use App\Exceptions\TeamMemberNotFoundException;
+use App\Exceptions\TeamMembers\TeamMemberNotFoundException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;

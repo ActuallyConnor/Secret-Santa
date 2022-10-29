@@ -3,7 +3,7 @@
 namespace App\Models\Users;
 
 use App\Domain\Users\User;
-use App\Exceptions\UserNotFoundException;
+use App\Exceptions\Users\UserNotFoundException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;

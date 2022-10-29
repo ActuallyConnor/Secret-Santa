@@ -4,7 +4,7 @@ namespace App\Models\Teams;
 
 use App\Api\JSON;
 use App\Domain\Teams\Team;
-use App\Exceptions\TeamNotFoundException;
+use App\Exceptions\Teams\TeamNotFoundException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use JsonException;

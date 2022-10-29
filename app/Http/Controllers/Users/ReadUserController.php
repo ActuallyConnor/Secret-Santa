@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Users;
 
 use App\Api\Serializers\Users\UserSerializer;
-use App\Exceptions\UserNotFoundException;
+use App\Exceptions\Users\UserNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Models\Users\UsersModel;
 use Illuminate\Http\JsonResponse;
